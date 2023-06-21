@@ -1,0 +1,61 @@
+.container{
+    width: 100vw;
+    height:100vh;
+    background-color:#ACBCFF;
+
+}
+header{
+    padding: 40px;
+}
+.header-logo{
+    width:100px;
+    height:100px;
+    display: inline-block;
+}
+.header-text{
+    display: inline;
+    position: absolute;
+    right: 40px;
+    top:70px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 24px;
+    color: #ffff;
+}
+
+.form-login{
+    text-align:center ;
+}
+.login-label{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 24px;
+    color: #ffff;
+    position: relative;
+    right: 100px;
+}
+#login-username{
+    padding:7px 50px;
+    margin-bottom: 10px;
+    border-radius: 45px;
+    border-style: none;
+}
+#login-password{
+    padding:7px 50px;
+    border-radius: 45px;
+    border-style: none;
+    margin-bottom: 10px;
+    position: relative;
+    left: 4px;
+}
+form input[type="submit"]{
+    width:20%;
+    padding:7px;
+    margin-top:40px;
+    color:#ffff;
+    background-color: #B799FF;
+    border-radius: 12px;
+
+}
+form button:hover{
+    background-color: #ffff;
+    color: #B799FF;
+}

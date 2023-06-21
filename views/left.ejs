@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>后台管理系统</title>
+
+    <link rel='stylesheet' href='/stylesheets/common.css'/>
+    <style>
+        img{
+            width:100px;
+            height:100px;
+        }
+        body{
+            background-color: #AEE2FF;
+        }
+        a,span{
+            color: #ffff;
+        }
+        ul{
+            list-style: none;
+            cursor: pointer;
+        }
+        .nav-left h3{
+            padding: 20px;
+        }
+        .nav-left > ul{
+            padding:0 16px;
+        }
+        .nav-left>ul>li{
+            padding:20px 0;
+            border-top:2px solid #ACBCFF;
+        }
+        .nav-left>ul>li:first-child{
+            border-top:none;
+        }
+        .menu{
+            position:relative;
+            margin:0 20px;
+            line-height:40px;
+            color:#ffff;
+            border-radius: 24px;
+
+        }
+        .menu.active{
+            background: #B799FF;
+        }
+        .menu>i:first-child{
+            padding:0 18px;
+        }
+        .menu>i:last-child{
+            position: absolute;
+            right: 24px;
+            top:12px;
+        }
+        .out{
+            position: fixed;
+            text-align: center;
+            color: #ffff;
+            background: #B799FF;
+            border-radius: 24px;
+            width: 80%;
+            line-height: 40px;
+            bottom:16px;
+            left:50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+    </style>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Poppins:wght@900&family=Ubuntu&display=swap" rel="stylesheet">
+
+
+    <script src="https://kit.fontawesome.com/0989f765ca.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="nav-left">
+    <h3>
+        <img src="/images/logo.png" alt="error">
+    </h3>
+    <ul>
+        <li>
+            <div class="menu active">
+                <i class="fa-solid fa-house"></i>
+                <span> Home </span>
+                <i class="fa-solid fa-arrow-right" class="down"></i>
+            </div>
+            <ul>
+                <li class="menu">
+                    <a href="/bannerList" target="right"><i class="fa-regular fa-image"></i>  Banner</a>
+                </li>
+                <li class="menu">
+                    <a href="#"><i class="fa-solid fa-calendar-days"></i>   Plan</a>
+                </li>
+                <li class="menu">
+                    <a href="#"><i class="fa-solid fa-graduation-cap"></i>  Class</a>
+                </li>
+                <li class="menu">
+                    <a href="#"><i class="fa-solid fa-list-check"></i>  Project</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <div class="menu">
+                <i class="fa-solid fa-thumbs-up"></i>
+                <span>Employ</span>
+                <i class="fa-solid fa-arrow-right" class="down"></i>
+            </div>
+        </li>
+        <li>
+            <div class="menu">
+                <i class="fa-solid fa-address-card"></i>
+                <span>Contact</span>
+                <i class="fa-solid fa-arrow-right" class="down"></i>
+            </div>
+        </li>
+
+    </ul>
+    <div class="out">Logout</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script src="/javascripts/jquery.js"></script>
+<script>
+    $(function(){
+
+        $('.nav-left>ul>li').click(function(){
+
+            //添加一级菜单样式
+            $(this).siblings().find('div.menu').removeClass('active');
+            $(this).find('div.menu').addClass('active');
+
+            //展开收起
+            $(this).siblings().find('ul').slideUp(200);
+            $(this).find('ul').slideDown(200);
+        })
+
+    })
+</script>
+</body>
+</html>

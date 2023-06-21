@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>后台管理系统</title>
+
+    <link rel='stylesheet' href='/stylesheets/common.css'/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Poppins:wght@900&family=Ubuntu&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <img src="/images/logo.png" class="header-logo" alt="error">
+        <div class="header-text">Backend Management</div>
+      </header>
+
+      <form action="/admin/main" method="post" class="form-login">
+        <h1>Login</h1>
+
+        <div class="form-group">
+          <label for="login-username" class="login-label">Username</label>
+          <input type="text" id="login-username" name="userName">
+        </div>
+
+        <div class="form-group">
+          <label for="login-password" class="login-label">Password</label>
+          <input type="password" id="login-password" name="userPwd">
+        </div>
+
+        <input type="submit" value="Login">
+      </form>
+
+    </div>
+
+  </body>
+</html>

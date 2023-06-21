@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>后台管理系统</title>
+    <link rel="stylesheet" href="/stylesheets/common.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+    <style>
+        .container{
+            width: 100vw;
+            height: 100vh;
+            background-color: #E6FFFD;
+            overflow: hidden;
+
+        }
+        .main{
+            padding:20px 30px;
+            overflow: hidden;
+            margin:0;
+        }
+        .select{
+            display: flex;
+            justify-content: space-between;
+            padding:20px 30px;
+            background-color: #ACBCFF;
+            border-radius: 24px;
+        }
+        .select select{
+            padding:0 20px;
+            width: 350px;
+            height: 40px;
+            color:#999999;
+            background-color:#ffff;
+            border-radius: 12px;
+            border:0;
+            outline: none;
+
+        }
+        .select .search{
+            display: flex;
+            width: 500px;
+            height: 40px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: aqua;
+        }
+        .select .search input{
+            flex:1;
+        }
+        .select .search div{
+            display: flex;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #B799FF;
+        }
+        .select button{
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #ffff;
+            background-color: #B799FF;
+            border-radius: 12px;
+        }
+        .content{
+            margin-top: 30px;
+        }
+
+        .edit,.delete,.close{
+            width:25px;
+            height: 25px;
+            padding:0 5px ;
+            cursor: pointer;
+        }
+
+        .dialog{
+            position:fixed;
+            right:0;
+            left:0;
+            bottom:0;
+            top:0;
+            width:100vw;
+            height: 100vh;
+            background-color: #000000;
+            opacity: .5;
+        }
+        .dialog-wrap{
+            position: absolute;
+            left:50%;
+            top: 50%;
+            z-index:999;
+            padding: 20px;
+            width: 460px;
+            margin-left: -120px;
+            background-color: #ffffff;
+            border-radius: 24px;
+            transform: translate(-50%,-50%);
+
+        }
+        .dialog-header{
+            position: relative;
+        }
+        .dialog-header>div{
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        form>div{
+            margin: 20px 0;
+        }
+        .dialog-footer{
+            text-align: right;
+        }
+        .dialog-footer button,.dialog-footer span{
+            display: inline-block;
+            padding: 6px 10px;
+            background-color:#B799FF ;
+            color:#ffffff;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .isDialog{
+            display: none!important;
+        }
+        .page{
+            width: 100%;
+            padding: 20px;
+            color: #ffffff;
+            border-top: 1px solid #ccc;
+        }
+        .page ul li{
+            margin-right: 6px;
+        }
+
+    </style>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Poppins:wght@900&family=Ubuntu&display=swap" rel="stylesheet">
+
+
+    <script src="https://kit.fontawesome.com/0989f765ca.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="main">
+        <div class="select">
+            <select name="" id="">
+                <option value="Please Select">Please Select</option>
+                <option value="Please Select">Please Select</option>
+                <option value="Please Select">Please Select</option>
+                <option value="Please Select">Please Select</option>
+            </select>
+
+            <div class="search">
+                <input type="text">
+                <div>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+
+            <div>
+                <button id="addBtn">Add</button>
+            </div>
+
+        </div>
+
+        <div class="content">
+            <table class="table table-striped">
+                <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Picture Name</th>
+                     <th>Picture Path</th>
+                     <th>Operate</th>
+                 </tr>
+                </thead>
+
+                <tbody>
+                    <% bannerList.forEach(function (item){ %>
+
+                    <tr>
+                        <td><%= item.id%></td>
+                        <td><%= item.name%></td>
+                        <td><%= item.imgurl%></td>
+                        <td>
+                            <img src="/images/pen-to-square-solid.svg" alt="error" class="edit">
+                            <img src="/images/trash-solid.svg" alt="error" class="delete">
+
+                        </td>
+                     </tr>
+
+                   <% }) %>
+                </tbody>
+            </table>
+            <div class="page">
+                <ul class="pagination">
+                    <%var preNum=5; var nextNum=5;%>
+                    <li class="disabled"><a href="javascript:;">total<%= pager.maxNum %></a></li>
+                    <li class="disabled"><a href="javascript:;">page<%= pager.pageNum %></a></li>
+                    <li class="disabled"><a href="javascript:;">homepage</a></li>
+                    <li class="disabled"><a href="javascript:;">last</a></li>
+
+                    <%for(var i=preNum;i>0;i--){%>
+                    <% if(parseInt(pager.pageCurrent)-i>0){%>
+                    <li><a href="/bannerList?page=<%= parseInt(pager.pageCurrent)-i %>"><%= parseInt(pager.pageCurrent)-i %></a></li>
+                    <%}}%>
+
+                    <li class="active"><a href="/bannerList?page=<%= parseInt(pager.pageCurrent)%>"><%= parseInt(pager.pageCurrent)%></a></li>
+
+                    <% for(var i=1;i<nextNum;i++){ %>
+                    <% if(parseInt(pager.pageCurrent)+i <= pager.pageNum){ %>
+                    <li><a href="/bannerList?page=<%= parseInt(pager.pageCurrent)+i %>"><%= parseInt(pager.pageCurrent)+i %></a></li>
+                  <%}}%>
+
+                    <li class="disabled"><a href="javascript:;">next</a></li>
+                    <li class="disabled"><a href="javascript:;">end</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="dialog isDialog"></div>
+<div class="dialog-wrap isDialog">
+    <div class="dialog-header">
+        <h3>add banner</h3>
+        <div class="close">
+            <img src="/images/xmark-solid.svg" alt="">
+        </div>
+    </div>
+    <form action="/addBanner" enctype="multipart/form-data" method="post">
+        <div>
+            <p>icon name</p>
+            <p>
+                <input type="text" class='form-control' name="imgName">
+            </p>
+        </div>
+        <div>
+            <p>picture route</p>
+            <input type="file" name="pic" class="upload-input" id="uploadInput">
+        </div>
+        <div class="dialog-footer">
+            <span class="cancel">cancel</span>
+            <button class="determine">determine</button>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script>
+    $(function (){
+        $('#addBtn').click(function (){
+            $('.dialog').removeClass('isDialog');
+            $('.dialog-wrap').removeClass('isDialog');
+        })
+
+        $('.close,.cancel').click(function (){
+            $('.dialog').addClass('isDialog');
+            $('.dialog-wrap').addClass('isDialog');
+        })
+    })
+</script>
+</body>
+</html>
