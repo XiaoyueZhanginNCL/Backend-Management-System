@@ -201,7 +201,13 @@
                     <%var preNum=5; var nextNum=5;%>
                     <li class="disabled"><a href="javascript:;">total<%= pager.maxNum %></a></li>
                     <li class="disabled"><a href="javascript:;">page<%= pager.pageNum %></a></li>
+
+                    <% if(pager.maxNum===0){%>
                     <li class="disabled"><a href="javascript:;">homepage</a></li>
+                    <%}else{%>
+                        <li><a href="/bannerList?page=1">homepage</a></li>
+                    <%}%>
+
                     <li class="disabled"><a href="javascript:;">last</a></li>
 
                     <%for(var i=preNum;i>0;i--){%>
@@ -217,7 +223,12 @@
                   <%}}%>
 
                     <li class="disabled"><a href="javascript:;">next</a></li>
-                    <li class="disabled"><a href="javascript:;">end</a></li>
+
+                    <% if(pager.maxNum===0){%>
+                        <li class="disabled"><a href="javascript:;">end</a></li>
+                    <%}else{%>
+                        <li><a href="/bannerList?page=<%=parseInt(pager.pageCount)%>">end</a></li>
+                    <%}%>
                 </ul>
             </div>
 

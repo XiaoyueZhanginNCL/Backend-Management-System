@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
         pager.maxNum=data.length;//总共多少条数据
         pager.pageSize=5;//每页多少条
         pager.pageCurrent=pageNo || 1;//默认当前页面为1
+        pager.pageCount=parseInt(Math.ceil(pager.maxNum/pager.pageSize));//一共多少页
         //修改当前页面呈现的数据
         var dataList=data.slice( (pager.pageCurrent-1)*pager.pageSize,(pager.pageCurrent-1)*pager.pageSize+pager.pageSize);
         if(pager.maxNum % pager.pageSize!==0){
