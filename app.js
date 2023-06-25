@@ -9,6 +9,7 @@ var left = require('./routes/left');
 var right = require('./routes/right');
 var bannerList = require('./routes/bannerList');
 var addBanner = require('./routes/addBanner');
+var like = require('./routes/like');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/left' , left);
 app.use('/right', right);
 app.use('/bannerList',bannerList);
 app.use('/addBanner',addBanner);
+app.use('/like',like);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

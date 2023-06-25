@@ -25,6 +25,13 @@
             background-color: #ACBCFF;
             border-radius: 24px;
         }
+        .select form{
+            display:flex;
+            justify-content: center;
+        }
+        .select form>div{
+            margin:0;
+        }
         .select select{
             padding:0 20px;
             width: 350px;
@@ -40,21 +47,17 @@
             display: flex;
             width: 500px;
             height: 40px;
+            margin-left: 15px;
             border-radius: 12px;
             overflow: hidden;
-            background-color: aqua;
         }
         .select .search input{
             flex:1;
         }
-        .select .search div{
-            display: flex;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
+        .select .search .search-btn{
             background-color: #B799FF;
         }
-        .select button{
+        .select .add-btn{
             width: 40px;
             height: 40px;
             line-height: 40px;
@@ -62,6 +65,11 @@
             color: #ffff;
             background-color: #B799FF;
             border-radius: 12px;
+            margin-left:10px;
+            margin-right: 10px;
+        }
+        .select input{
+            padding-left:10px;
         }
         .content{
             margin-top: 30px;
@@ -148,22 +156,25 @@
 <div class="container">
     <div class="main">
         <div class="select">
-            <select name="" id="">
-                <option value="Please Select">Please Select</option>
-                <option value="Please Select">Please Select</option>
-                <option value="Please Select">Please Select</option>
-                <option value="Please Select">Please Select</option>
-            </select>
 
-            <div class="search">
-                <input type="text">
-                <div>
-                    <i class="fa-solid fa-magnifying-glass"></i>
+            <form action="/like" method="get">
+                <select name="" id="">
+                    <option value="Please Select">Please Select</option>
+                    <option value="Please Select">Please Select</option>
+                    <option value="Please Select">Please Select</option>
+                    <option value="Please Select">Please Select</option>
+                </select>
+
+                <div class="search">
+                    <input type="text" name="like">
+                    <button class="search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </div>
-            </div>
+            </form>
 
             <div>
-                <button id="addBtn">Add</button>
+                <button id="addBtn" class="add-btn">Add</button>
             </div>
 
         </div>
@@ -208,7 +219,12 @@
                         <li><a href="/bannerList?page=1">homepage</a></li>
                     <%}%>
 
-                    <li class="disabled"><a href="javascript:;">last</a></li>
+
+                    <% if(pager.pageCurrent===1){%>
+                        <li class="disabled"><a href="javascript:;">last</a></li>
+                    <%}else{%>
+                        <li><a href="/bannerList?page=<%= parseInt(pager.pageCurrent)-1 %>">last</a></li>
+                    <%}%>
 
                     <%for(var i=preNum;i>0;i--){%>
                     <% if(parseInt(pager.pageCurrent)-i>0){%>
@@ -222,9 +238,14 @@
                     <li><a href="/bannerList?page=<%= parseInt(pager.pageCurrent)+i %>"><%= parseInt(pager.pageCurrent)+i %></a></li>
                   <%}}%>
 
-                    <li class="disabled"><a href="javascript:;">next</a></li>
+                    <% if(pager.pageCurrent == pager.pageCount){%>
+                        <li class="disabled"><a href="javascript:;">next</a></li>
+                    <%}else{%>
+                        <li><a href="/bannerList?page=<%= parseInt(pager.pageCurrent)+1 %>">next</a></li>
+                    <%}%>
 
-                    <% if(pager.maxNum===0){%>
+
+                <% if(pager.maxNum===0){%>
                         <li class="disabled"><a href="javascript:;">end</a></li>
                     <%}else{%>
                         <li><a href="/bannerList?page=<%=parseInt(pager.pageCount)%>">end</a></li>
