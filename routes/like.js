@@ -3,15 +3,14 @@ var router = express.Router();
 var db=require('../sql.js')
 
 router.get('/', function(req, res, next) {
-    var like=req.query.like;
+    var like=req.query.like||req.query.selectVal;
     var pageNo=req.query.page;//从url获取到当前页码
 
-    db.query(`select * from banner where name like "%${like}"`,function (err,data){
+    db.query(`select * from banner where name like "%${like}%"`,function (err,data){
         var pager={};
         pager.maxNum=data.length;//总共多少条数据
         pager.pageSize=5;//每页多少条
         pager.pageCurrent=pageNo || 1;//默认当前页面为1
-        pager.pageCount=parseInt(Math.ceil(pager.maxNum/pager.pageSize));//一共多少页
         //修改当前页面呈现的数据
         var dataList=data.slice( (pager.pageCurrent-1)*pager.pageSize,(pager.pageCurrent-1)*pager.pageSize+pager.pageSize);
         if(pager.maxNum % pager.pageSize!==0){
